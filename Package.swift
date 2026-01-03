@@ -19,6 +19,7 @@ let package = Package(
         .target(
             name: "Karenda",
             path: "Sources",
+            exclude: [],
             resources: [
                 .process("Resources")
             ]

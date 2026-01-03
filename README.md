@@ -1,4 +1,4 @@
-# Karenda
+# Karenda (カレンダー)
 
 A modern UIKit-based calendar date picker framework for iOS.
 
@@ -14,6 +14,15 @@ A modern UIKit-based calendar date picker framework for iOS.
 - 🏖️ **Holiday Support** - Highlight public holidays with dot indicators and names
 - 📱 **iOS 13+** - Built with modern UICollectionViewCompositionalLayout
 - 🧩 **Easy Integration** - Simple configuration API
+
+<details>
+<summary>📸 Screenshots</summary>
+
+| Vertical | Horizontal | Single Select |
+|:--------:|:----------:|:-------------:|
+| ![Vertical](Screenshots/vertical.png) | ![Horizontal](Screenshots/horizontal.png) | ![Single Select](Screenshots/single_select.png) |
+
+</details>
 
 ## Requirements
 
@@ -146,39 +155,6 @@ KarendaRepresentable(
     selectedDate: $selectedDate  // Single binding for single select mode
 )
 ```
-```
-
-## Configuration Options
-
-All configuration options for `KarendaConfig`:
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `startDate` | `String` | - | Start date of calendar range (dd/MM/yyyy) |
-| `endDate` | `String` | - | End date of calendar range (dd/MM/yyyy) |
-| `holidays` | `[KarendaHoliday]` | `[]` | List of holidays with date and name |
-| `isMultiSelectEnabled` | `Bool` | `true` | `true` = date range, `false` = single date |
-| `direction` | `KarendaDirection` | `.vertical` | `.vertical` or `.horizontal` |
-| `startDayOfWeek` | `KarendaStartDay` | `.sunday` | First day of week (`.sunday`, `.monday`, etc.) |
-| `selectedBackgroundColor` | `UIColor` | `.systemBlue` | Background color of selected dates |
-| `selectionCornerRadius` | `CGFloat` | `0` | Corner radius of selection (0 = square, high = circle) |
-| `rangeBackgroundColor` | `UIColor` | Blue 15% | Background color of dates in range |
-| `textTintColor` | `UIColor?` | `nil` | Optional tint for day text |
-| `selectedTextColor` | `UIColor` | `.white` | Text color of selected dates |
-| `todayTextColor` | `UIColor` | `.systemBlue` | Text color of today's date |
-| `holidayTextColor` | `UIColor` | `.systemRed` | Text color of holiday dates |
-| `holidayIndicatorColor` | `UIColor` | Same as holiday | Color of holiday dot indicator |
-| `weekendTextColor` | `UIColor` | `.secondaryLabel` | Text color of weekend days |
-| `disabledTextColor` | `UIColor` | `.tertiaryLabel` | Text color of disabled dates |
-| `headerTextColor` | `UIColor` | `.label` | Text color of month headers |
-| `weekdayLabelColor` | `UIColor` | `.secondaryLabel` | Text color of weekday labels |
-| `backgroundColor` | `UIColor` | `.systemBackground` | Calendar background color |
-| `dayFont` | `UIFont?` | System 16 | Font for day numbers |
-| `headerFont` | `UIFont?` | System 17 medium | Font for month headers |
-| `weekdayFont` | `UIFont?` | System 13 | Font for weekday labels |
-| `footerFont` | `UIFont?` | System 12 | Font for footer holiday names |
-
-### KarendaHoliday
 
 ```swift
 let holiday = KarendaHoliday(
@@ -273,22 +249,37 @@ if let (month, year) = calendarPicker.currentVisibleMonth() {
     print("Viewing: \(month)/\(year)")
 }
 ```
+## Configuration Options
 
-## Example Project
+All configuration options for `KarendaConfig`:
 
-An example project is included in the `Example` directory. To run it:
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `startDate` | `String` | - | Start date of calendar range (dd/MM/yyyy) |
+| `endDate` | `String` | - | End date of calendar range (dd/MM/yyyy) |
+| `holidays` | `[KarendaHoliday]` | `[]` | List of holidays with date and name |
+| `isMultiSelectEnabled` | `Bool` | `true` | `true` = date range, `false` = single date |
+| `direction` | `KarendaDirection` | `.vertical` | `.vertical` or `.horizontal` |
+| `startDayOfWeek` | `KarendaStartDay` | `.sunday` | First day of week (`.sunday`, `.monday`, etc.) |
+| `selectedBackgroundColor` | `UIColor` | `.systemBlue` | Background color of selected dates |
+| `selectionCornerRadius` | `CGFloat` | `0` | Corner radius of selection (0 = square, high = circle) |
+| `rangeBackgroundColor` | `UIColor` | Blue 15% | Background color of dates in range |
+| `textTintColor` | `UIColor?` | `nil` | Optional tint for day text |
+| `selectedTextColor` | `UIColor` | `.white` | Text color of selected dates |
+| `todayTextColor` | `UIColor` | `.systemBlue` | Text color of today's date |
+| `holidayTextColor` | `UIColor` | `.systemRed` | Text color of holiday dates |
+| `holidayIndicatorColor` | `UIColor` | Same as holiday | Color of holiday dot indicator |
+| `weekendTextColor` | `UIColor` | `.secondaryLabel` | Text color of weekend days |
+| `disabledTextColor` | `UIColor` | `.tertiaryLabel` | Text color of disabled dates |
+| `headerTextColor` | `UIColor` | `.label` | Text color of month headers |
+| `weekdayLabelColor` | `UIColor` | `.secondaryLabel` | Text color of weekday labels |
+| `backgroundColor` | `UIColor` | `.systemBackground` | Calendar background color |
+| `dayFont` | `UIFont?` | System 16 | Font for day numbers |
+| `headerFont` | `UIFont?` | System 17 medium | Font for month headers |
+| `weekdayFont` | `UIFont?` | System 13 | Font for weekday labels |
+| `footerFont` | `UIFont?` | System 12 | Font for footer holiday names |
 
-```bash
-cd Example
-tuist generate
-open KarendaExample.xcworkspace
-```
 
-The example demonstrates:
-- Vertical scrolling calendar with date range selection
-- Horizontal paging calendar
-- Single date selection mode
-- Holiday highlighting with footer
 
 ## Library Evolution
 
