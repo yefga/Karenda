@@ -2,7 +2,7 @@
 //  KarendaDayCell.swift
 //  Karenda
 //
-//  Created on 2026-01-03.
+//  Created by Yefga on 2026-01-03.
 //
 
 import UIKit
@@ -43,9 +43,18 @@ final class KarendaDayCell: UICollectionViewCell {
         return view
     }()
     
+    /// Small circle dot indicator for holidays
+    private let holidayIndicatorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
     // MARK: - Properties
     
     private var cornerRadius: CGFloat = 0
+    private var indicatorSize: CGFloat = 5
     
     // MARK: - Initialization
     
@@ -65,6 +74,7 @@ final class KarendaDayCell: UICollectionViewCell {
         contentView.addSubview(rangeBackgroundView)
         contentView.addSubview(selectionBackgroundView)
         contentView.addSubview(dayLabel)
+        contentView.addSubview(holidayIndicatorView)
         
         NSLayoutConstraint.activate([
             // Range background (full width for connecting days)
@@ -81,13 +91,22 @@ final class KarendaDayCell: UICollectionViewCell {
             
             // Day label
             dayLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            dayLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            dayLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+            // Holiday indicator dot (below the day number)
+            holidayIndicatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            holidayIndicatorView.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 2),
+            holidayIndicatorView.widthAnchor.constraint(equalToConstant: indicatorSize),
+            holidayIndicatorView.heightAnchor.constraint(equalToConstant: indicatorSize)
         ])
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         updateCornerRadius()
+        
+        // Make holiday indicator circular
+        holidayIndicatorView.layer.cornerRadius = indicatorSize / 2
     }
     
     private func updateCornerRadius() {
@@ -108,6 +127,8 @@ final class KarendaDayCell: UICollectionViewCell {
         selectionBackgroundView.backgroundColor = .clear
         rangeBackgroundView.backgroundColor = .clear
         dayLabel.textColor = .label
+        holidayIndicatorView.isHidden = true
+        holidayIndicatorView.backgroundColor = .clear
         cornerRadius = 0
     }
     
@@ -122,6 +143,7 @@ final class KarendaDayCell: UICollectionViewCell {
             dayLabel.text = nil
             selectionBackgroundView.backgroundColor = .clear
             rangeBackgroundView.backgroundColor = .clear
+            holidayIndicatorView.isHidden = true
             return
         }
         
@@ -129,6 +151,14 @@ final class KarendaDayCell: UICollectionViewCell {
         
         // Apply selection state
         applyState(state, day: day, config: config)
+        
+        // Show holiday indicator if it's a holiday
+        if day.isHoliday && day.isEnabled {
+            holidayIndicatorView.isHidden = false
+            holidayIndicatorView.backgroundColor = config.holidayIndicatorColor
+        } else {
+            holidayIndicatorView.isHidden = true
+        }
         
         // Update corner radius after config is set
         setNeedsLayout()
@@ -162,6 +192,7 @@ final class KarendaDayCell: UICollectionViewCell {
         case .selected:
             selectionBackgroundView.backgroundColor = config.selectedBackgroundColor
             dayLabel.textColor = config.selectedTextColor
+            // Hide holiday indicator when selected (optional: you can show it if preferred)
             
         case .rangeStart:
             selectionBackgroundView.backgroundColor = config.selectedBackgroundColor

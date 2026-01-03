@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  KarendaExampleApp
 //
-//  Created on 2026-01-03.
+//  Created by Yefga on 2026-01-03.
 //
 
 import UIKit

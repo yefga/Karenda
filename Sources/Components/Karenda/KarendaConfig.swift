@@ -2,7 +2,7 @@
 //  KarendaConfig.swift
 //  Karenda
 //
-//  Created on 2026-01-03.
+//  Created by Yefga on 2026-01-03.
 //
 
 import UIKit
@@ -99,6 +99,9 @@ public struct KarendaConfig {
     /// Text color for public holidays
     public let holidayTextColor: UIColor
     
+    /// Color for the holiday indicator dot. Defaults to same as holidayTextColor.
+    public let holidayIndicatorColor: UIColor
+    
     /// Text color for weekend days (Saturday and Sunday)
     public let weekendTextColor: UIColor
     
@@ -156,7 +159,7 @@ public struct KarendaConfig {
         publicHolidays: [String] = [],
         isMultiSelectEnabled: Bool = true,
         direction: KarendaDirection = .vertical,
-        startDayOfWeek: KarendaStartDay = .sunday,
+        startDayOfWeek: KarendaStartDay = .monday,
         selectedBackgroundColor: UIColor = .systemBlue,
         selectionCornerRadius: CGFloat = 0,
         rangeBackgroundColor: UIColor? = nil,
@@ -164,6 +167,7 @@ public struct KarendaConfig {
         selectedTextColor: UIColor = .white,
         todayTextColor: UIColor = .systemBlue,
         holidayTextColor: UIColor = .systemRed,
+        holidayIndicatorColor: UIColor? = nil,
         weekendTextColor: UIColor = .secondaryLabel,
         disabledTextColor: UIColor = .tertiaryLabel,
         headerTextColor: UIColor = .label,
@@ -186,6 +190,7 @@ public struct KarendaConfig {
         self.selectedTextColor = selectedTextColor
         self.todayTextColor = todayTextColor
         self.holidayTextColor = holidayTextColor
+        self.holidayIndicatorColor = holidayIndicatorColor ?? holidayTextColor
         self.weekendTextColor = weekendTextColor
         self.disabledTextColor = disabledTextColor
         self.headerTextColor = headerTextColor

@@ -2,7 +2,7 @@
 //  VerticalCalendarViewController.swift
 //  KarendaExampleApp
 //
-//  Created on 2026-01-03.
+//  Created by Yefga on 2026-01-03.
 //
 
 import UIKit
@@ -61,7 +61,7 @@ final class VerticalCalendarViewController: UIViewController {
             publicHolidays: holidays,
             isMultiSelectEnabled: true,
             direction: .vertical,                    // Vertical scrolling
-            startDayOfWeek: .sunday,                 // Week starts on Sunday
+            startDayOfWeek: .monday,                 // Week starts on Sunday
             selectedBackgroundColor: .systemBlue,
             selectionCornerRadius: 20               // Rounded corners on selection
         )
