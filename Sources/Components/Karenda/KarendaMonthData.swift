@@ -80,7 +80,7 @@ final class KarendaDataGenerator {
         self.calendar = calendar
         self.startDayOfWeek = config.startDayOfWeek
         
-        self.holidays = config.parsedPublicHolidays
+        self.holidays = config.parsedHolidayDates
         self.rangeStart = config.parsedStartDate ?? Date()
         self.rangeEnd = config.parsedEndDate ?? Date()
     }

@@ -2,7 +2,7 @@
 //  VerticalCalendarViewController.swift
 //  KarendaExampleApp
 //
-//  Created by Yefga on 2026-01-03.
+//  Created on 2026-01-03.
 //
 
 import UIKit
@@ -47,21 +47,23 @@ final class VerticalCalendarViewController: UIViewController {
         let startDateString = KarendaConfig.formatDate(today)
         let endDateString = KarendaConfig.formatDate(oneYearLater)
         
-        // Define some sample holidays
-        let holidays = [
-            "01/01/2026",
-            "14/02/2026",
-            "25/12/2026"
+        // Define holidays with date and name
+        let holidays: [KarendaHoliday] = [
+            KarendaHoliday(date: "01/01/2026", name: "New Year's Day"),
+            KarendaHoliday(date: "14/02/2026", name: "Valentine's Day"),
+            KarendaHoliday(date: "17/08/2026", name: "Independence Day"),
+            KarendaHoliday(date: "25/12/2026", name: "Christmas Day"),
+            KarendaHoliday(date: "31/12/2026", name: "New Year's Eve")
         ]
         
         // Create configuration with new options
         let config = KarendaConfig(
             startDate: startDateString,
             endDate: endDateString,
-            publicHolidays: holidays,
+            holidays: holidays,
             isMultiSelectEnabled: true,
             direction: .vertical,                    // Vertical scrolling
-            startDayOfWeek: .monday,                 // Week starts on Sunday
+            startDayOfWeek: .monday,                 // Week starts on Monday
             selectedBackgroundColor: .systemBlue,
             selectionCornerRadius: 20               // Rounded corners on selection
         )

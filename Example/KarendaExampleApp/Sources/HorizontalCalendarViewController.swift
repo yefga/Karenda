@@ -2,7 +2,7 @@
 //  HorizontalCalendarViewController.swift
 //  KarendaExampleApp
 //
-//  Created by Yefga on 2026-01-03.
+//  Created on 2026-01-03.
 //
 
 import UIKit
@@ -56,19 +56,26 @@ final class HorizontalCalendarViewController: UIViewController {
         let startDateString = KarendaConfig.formatDate(today)
         let endDateString = KarendaConfig.formatDate(sixMonthsLater)
         
+        // Holidays with names
+        let holidays: [KarendaHoliday] = [
+            KarendaHoliday(date: "01/01/2026", name: "New Year's Day"),
+            KarendaHoliday(date: "14/02/2026", name: "Valentine's Day")
+        ]
+        
         // Custom styling with horizontal paging
         let config = KarendaConfig(
             startDate: startDateString,
             endDate: endDateString,
+            holidays: holidays,
             isMultiSelectEnabled: true,
-            direction: .horizontal,                   // Horizontal: 1 month per page, swipe left/right
+            direction: .horizontal,                   // Horizontal: 1 month per page
             startDayOfWeek: .monday,                  // Week starts on Monday
             selectedBackgroundColor: .systemPurple,
-            selectionCornerRadius: 100,               // Circular selection (high value = circle)
+            selectionCornerRadius: 100,               // Circular selection
             rangeBackgroundColor: UIColor.systemPurple.withAlphaComponent(0.15),
-            textTintColor: .label,                    // Optional text tint
+            textTintColor: .label,
             todayTextColor: .systemPurple,
-            dayFont: .systemFont(ofSize: 17, weight: .medium),  // Custom font
+            dayFont: .systemFont(ofSize: 17, weight: .medium),
             headerFont: .systemFont(ofSize: 20, weight: .bold)
         )
         
@@ -94,7 +101,7 @@ final class HorizontalCalendarViewController: UIViewController {
             karendaView.topAnchor.constraint(equalTo: monthLabel.bottomAnchor, constant: 16),
             karendaView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             karendaView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            karendaView.heightAnchor.constraint(equalTo: karendaView.widthAnchor, multiplier: 1.0)
+            karendaView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     

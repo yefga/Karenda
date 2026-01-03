@@ -52,6 +52,38 @@ final class KarendaTests: XCTestCase {
         XCTAssertEqual(monday.weekdayLabels, ["M", "T", "W", "T", "F", "S", "S"])
     }
     
+    func testHolidayStruct() {
+        let holiday = KarendaHoliday(date: "25/12/2024", name: "Christmas Day")
+        
+        XCTAssertEqual(holiday.date, "25/12/2024")
+        XCTAssertEqual(holiday.name, "Christmas Day")
+        XCTAssertNotNil(holiday.parsedDate)
+    }
+    
+    func testHolidaysForMonth() {
+        let holidays = [
+            KarendaHoliday(date: "01/01/2024", name: "New Year"),
+            KarendaHoliday(date: "25/12/2024", name: "Christmas")
+        ]
+        
+        let config = KarendaConfig(
+            startDate: "01/01/2024",
+            endDate: "31/12/2024",
+            holidays: holidays
+        )
+        
+        let januaryHolidays = config.holidays(forMonth: 1, year: 2024)
+        XCTAssertEqual(januaryHolidays.count, 1)
+        XCTAssertEqual(januaryHolidays.first?.name, "New Year")
+        
+        let decemberHolidays = config.holidays(forMonth: 12, year: 2024)
+        XCTAssertEqual(decemberHolidays.count, 1)
+        XCTAssertEqual(decemberHolidays.first?.name, "Christmas")
+        
+        let juneHolidays = config.holidays(forMonth: 6, year: 2024)
+        XCTAssertTrue(juneHolidays.isEmpty)
+    }
+    
     // MARK: - Theme Tests
     
     func testDefaultTheme() {

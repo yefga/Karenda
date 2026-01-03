@@ -2,7 +2,7 @@
 //  SingleSelectViewController.swift
 //  KarendaExampleApp
 //
-//  Created by Yefga on 2026-01-03.
+//  Created on 2026-01-03.
 //
 
 import UIKit
@@ -56,16 +56,17 @@ final class SingleSelectViewController: UIViewController {
         let startDateString = KarendaConfig.formatDate(threeMonthsAgo)
         let endDateString = KarendaConfig.formatDate(sixMonthsLater)
         
-        // Square selection with custom tint color
+        // No holidays for this example
         let config = KarendaConfig(
             startDate: startDateString,
             endDate: endDateString,
+            holidays: [],
             isMultiSelectEnabled: false,              // Single selection mode
             direction: .vertical,
             startDayOfWeek: .sunday,
             selectedBackgroundColor: .systemTeal,
             selectionCornerRadius: 0,                 // Square selection (default)
-            textTintColor: .darkGray,                 // Custom text tint
+            textTintColor: .darkGray,
             selectedTextColor: .white,
             todayTextColor: .systemOrange,
             holidayTextColor: .systemPink,

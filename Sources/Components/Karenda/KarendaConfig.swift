@@ -2,7 +2,7 @@
 //  KarendaConfig.swift
 //  Karenda
 //
-//  Created by Yefga on 2026-01-03.
+//  Created on 2026-01-03.
 //
 
 import UIKit
@@ -57,8 +57,8 @@ public struct KarendaConfig {
     
     // MARK: - Features
     
-    /// List of public holidays to highlight (format: dd/MM/yyyy)
-    public let publicHolidays: [String]
+    /// List of public holidays with date and name
+    public let holidays: [KarendaHoliday]
     
     /// Whether multi-date selection is enabled.
     /// When `true`, users can select a date range (start and end).
@@ -128,13 +128,16 @@ public struct KarendaConfig {
     /// Font for weekday labels (optional). When nil, uses system font.
     public let weekdayFont: UIFont?
     
+    /// Font for footer holiday labels (optional). When nil, uses system font.
+    public let footerFont: UIFont?
+    
     // MARK: - Initialization
     
     /// Creates a new Karenda configuration.
     /// - Parameters:
     ///   - startDate: The start date of the calendar range (format: dd/MM/yyyy)
     ///   - endDate: The end date of the calendar range (format: dd/MM/yyyy)
-    ///   - publicHolidays: List of public holidays (format: dd/MM/yyyy). Defaults to empty.
+    ///   - holidays: List of holidays with date and name. Defaults to empty.
     ///   - isMultiSelectEnabled: Whether multi-date selection is enabled. Defaults to `true`.
     ///   - direction: Scroll direction (`.vertical` or `.horizontal`). Defaults to `.vertical`.
     ///   - startDayOfWeek: First day of the week. Defaults to `.sunday`.
@@ -145,6 +148,7 @@ public struct KarendaConfig {
     ///   - selectedTextColor: Text color for selected dates. Defaults to white.
     ///   - todayTextColor: Text color for today. Defaults to system blue.
     ///   - holidayTextColor: Text color for holidays. Defaults to system red.
+    ///   - holidayIndicatorColor: Color for holiday dot. Defaults to holidayTextColor.
     ///   - weekendTextColor: Text color for weekends. Defaults to secondary label.
     ///   - disabledTextColor: Text color for disabled days. Defaults to tertiary label.
     ///   - headerTextColor: Text color for headers. Defaults to label color.
@@ -153,13 +157,14 @@ public struct KarendaConfig {
     ///   - dayFont: Optional font for day numbers.
     ///   - headerFont: Optional font for headers.
     ///   - weekdayFont: Optional font for weekday labels.
+    ///   - footerFont: Optional font for footer holiday labels.
     public init(
         startDate: String,
         endDate: String,
-        publicHolidays: [String] = [],
+        holidays: [KarendaHoliday] = [],
         isMultiSelectEnabled: Bool = true,
         direction: KarendaDirection = .vertical,
-        startDayOfWeek: KarendaStartDay = .monday,
+        startDayOfWeek: KarendaStartDay = .sunday,
         selectedBackgroundColor: UIColor = .systemBlue,
         selectionCornerRadius: CGFloat = 0,
         rangeBackgroundColor: UIColor? = nil,
@@ -175,11 +180,12 @@ public struct KarendaConfig {
         backgroundColor: UIColor = .systemBackground,
         dayFont: UIFont? = nil,
         headerFont: UIFont? = nil,
-        weekdayFont: UIFont? = nil
+        weekdayFont: UIFont? = nil,
+        footerFont: UIFont? = nil
     ) {
         self.startDate = startDate
         self.endDate = endDate
-        self.publicHolidays = publicHolidays
+        self.holidays = holidays
         self.isMultiSelectEnabled = isMultiSelectEnabled
         self.direction = direction
         self.startDayOfWeek = startDayOfWeek
@@ -199,6 +205,7 @@ public struct KarendaConfig {
         self.dayFont = dayFont
         self.headerFont = headerFont
         self.weekdayFont = weekdayFont
+        self.footerFont = footerFont
     }
     
     // MARK: - Resolved Fonts
@@ -216,6 +223,11 @@ public struct KarendaConfig {
     /// Resolved font for weekday labels
     var resolvedWeekdayFont: UIFont {
         weekdayFont ?? .systemFont(ofSize: 13)
+    }
+    
+    /// Resolved font for footer
+    var resolvedFooterFont: UIFont {
+        footerFont ?? .systemFont(ofSize: 12)
     }
     
     /// Resolved text color for regular days
@@ -237,15 +249,11 @@ extension KarendaConfig {
     }()
     
     /// Parses a date string in dd/MM/yyyy format
-    /// - Parameter dateString: The date string to parse
-    /// - Returns: The parsed Date, or nil if parsing fails
     public static func parseDate(_ dateString: String) -> Date? {
         return dateFormatter.date(from: dateString)
     }
     
     /// Formats a Date to dd/MM/yyyy string
-    /// - Parameter date: The date to format
-    /// - Returns: The formatted string
     public static func formatDate(_ date: Date) -> String {
         return dateFormatter.string(from: date)
     }
@@ -260,16 +268,26 @@ extension KarendaConfig {
         return KarendaConfig.parseDate(endDate)
     }
     
-    /// The parsed public holiday dates
-    public var parsedPublicHolidays: Set<Date> {
+    /// The parsed public holiday dates (for checking if a date is a holiday)
+    public var parsedHolidayDates: Set<Date> {
         let calendar = Calendar.current
-        var holidays = Set<Date>()
-        for holiday in publicHolidays {
-            if let date = KarendaConfig.parseDate(holiday) {
+        var holidayDates = Set<Date>()
+        for holiday in holidays {
+            if let date = holiday.parsedDate {
                 let normalized = calendar.startOfDay(for: date)
-                holidays.insert(normalized)
+                holidayDates.insert(normalized)
             }
         }
-        return holidays
+        return holidayDates
+    }
+    
+    /// Returns holidays for a specific month and year
+    public func holidays(forMonth month: Int, year: Int) -> [KarendaHoliday] {
+        let calendar = Calendar.current
+        return holidays.filter { holiday in
+            guard let date = holiday.parsedDate else { return false }
+            let components = calendar.dateComponents([.month, .year], from: date)
+            return components.month == month && components.year == year
+        }
     }
 }

@@ -2,7 +2,7 @@
 //  KarendaView.swift
 //  Karenda
 //
-//  Created by Yefga on 2026-01-03.
+//  Created on 2026-01-03.
 //
 
 import UIKit
@@ -98,12 +98,7 @@ public final class KarendaView: UIView {
         collectionView.backgroundColor = config.backgroundColor
         collectionView.showsVerticalScrollIndicator = true
         
-        collectionView.register(KarendaDayCell.self, forCellWithReuseIdentifier: KarendaDayCell.reuseIdentifier)
-        collectionView.register(
-            KarendaMonthHeaderView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: KarendaMonthHeaderView.reuseIdentifier
-        )
+        registerCellsAndSupplementaryViews(for: collectionView)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -120,13 +115,27 @@ public final class KarendaView: UIView {
         self.verticalCollectionView = collectionView
     }
     
+    private func registerCellsAndSupplementaryViews(for collectionView: UICollectionView) {
+        collectionView.register(KarendaDayCell.self, forCellWithReuseIdentifier: KarendaDayCell.reuseIdentifier)
+        collectionView.register(
+            KarendaMonthHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: KarendaMonthHeaderView.reuseIdentifier
+        )
+        collectionView.register(
+            KarendaMonthFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: KarendaMonthFooterView.reuseIdentifier
+        )
+    }
+    
     private func createVerticalLayout() -> UICollectionViewLayout {
-        UICollectionViewCompositionalLayout { [weak self] _, environment in
-            self?.createMonthSection(environment: environment)
+        UICollectionViewCompositionalLayout { [weak self] sectionIndex, environment in
+            self?.createMonthSection(sectionIndex: sectionIndex, environment: environment)
         }
     }
     
-    private func createMonthSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    private func createMonthSection(sectionIndex: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0 / 7.0),
             heightDimension: .fractionalWidth(1.0 / 7.0)
@@ -140,8 +149,9 @@ public final class KarendaView: UIView {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 16, trailing: 8)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 8, trailing: 8)
         
+        // Header
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(70)
@@ -151,7 +161,29 @@ public final class KarendaView: UIView {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        section.boundarySupplementaryItems = [header]
+        
+        var supplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem] = [header]
+        
+        // Footer - only if this month has holidays
+        if sectionIndex < months.count {
+            let month = months[sectionIndex]
+            let holidaysInMonth = config.holidays(forMonth: month.month, year: month.year)
+            
+            if !holidaysInMonth.isEmpty {
+                let footerSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(50)
+                )
+                let footer = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: footerSize,
+                    elementKind: UICollectionView.elementKindSectionFooter,
+                    alignment: .bottom
+                )
+                supplementaryItems.append(footer)
+            }
+        }
+        
+        section.boundarySupplementaryItems = supplementaryItems
         
         return section
     }
@@ -159,7 +191,6 @@ public final class KarendaView: UIView {
     // MARK: - Horizontal Mode (Paging ScrollView + CollectionViews)
     
     private func setupHorizontalMode() {
-        // Create paging scroll view
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.isPagingEnabled = true
@@ -180,33 +211,25 @@ public final class KarendaView: UIView {
         
         self.horizontalScrollView = scrollView
         
-        // Create a collection view for each month
         createMonthCollectionViews()
     }
     
     private func createMonthCollectionViews() {
         guard let scrollView = horizontalScrollView else { return }
         
-        // Clear existing
         monthCollectionViews.forEach { $0.removeFromSuperview() }
         monthCollectionViews.removeAll()
         
-        // Create one collection view per month
         for index in 0..<months.count {
-            let layout = createSingleMonthLayout()
+            let layout = createSingleMonthLayout(monthIndex: index)
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
             collectionView.backgroundColor = config.backgroundColor
             collectionView.showsVerticalScrollIndicator = false
             collectionView.showsHorizontalScrollIndicator = false
-            collectionView.isScrollEnabled = false // Disable scrolling within each month
+            collectionView.isScrollEnabled = false
             collectionView.tag = index
             
-            collectionView.register(KarendaDayCell.self, forCellWithReuseIdentifier: KarendaDayCell.reuseIdentifier)
-            collectionView.register(
-                KarendaMonthHeaderView.self,
-                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                withReuseIdentifier: KarendaMonthHeaderView.reuseIdentifier
-            )
+            registerCellsAndSupplementaryViews(for: collectionView)
             
             collectionView.dataSource = self
             collectionView.delegate = self
@@ -216,9 +239,9 @@ public final class KarendaView: UIView {
         }
     }
     
-    private func createSingleMonthLayout() -> UICollectionViewLayout {
+    private func createSingleMonthLayout(monthIndex: Int) -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { [weak self] _, environment in
-            self?.createMonthSection(environment: environment)
+            self?.createMonthSection(sectionIndex: monthIndex, environment: environment)
         }
     }
     
@@ -228,13 +251,11 @@ public final class KarendaView: UIView {
         let pageWidth = bounds.width
         let pageHeight = bounds.height
         
-        // Set content size for all months
         scrollView.contentSize = CGSize(
             width: pageWidth * CGFloat(months.count),
             height: pageHeight
         )
         
-        // Position each collection view as a page
         for (index, collectionView) in monthCollectionViews.enumerated() {
             collectionView.frame = CGRect(
                 x: CGFloat(index) * pageWidth,
@@ -251,7 +272,6 @@ public final class KarendaView: UIView {
         self.config = config
         backgroundColor = config.backgroundColor
         
-        // Clean up
         verticalCollectionView?.removeFromSuperview()
         verticalCollectionView = nil
         horizontalScrollView?.removeFromSuperview()
@@ -460,16 +480,6 @@ public final class KarendaView: UIView {
         
         return .normal
     }
-    
-    // MARK: - Helper to get month index from collection view
-    
-    private func monthIndex(for collectionView: UICollectionView) -> Int {
-        if config.direction == .vertical {
-            return 0 // Not used for vertical - sections handle it
-        } else {
-            return collectionView.tag
-        }
-    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -481,7 +491,6 @@ extension KarendaView: UICollectionViewDataSource {
         case .vertical:
             return months.count
         case .horizontal:
-            // Each horizontal collection view shows only 1 month (1 section)
             return 1
         }
     }
@@ -527,15 +536,6 @@ extension KarendaView: UICollectionViewDataSource {
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader,
-              let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: KarendaMonthHeaderView.reuseIdentifier,
-                for: indexPath
-              ) as? KarendaMonthHeaderView else {
-            return UICollectionReusableView()
-        }
-        
         let monthIdx: Int
         switch config.direction {
         case .vertical:
@@ -544,11 +544,38 @@ extension KarendaView: UICollectionViewDataSource {
             monthIdx = collectionView.tag
         }
         
-        guard monthIdx < months.count else { return header }
+        guard monthIdx < months.count else {
+            return UICollectionReusableView()
+        }
         
         let month = months[monthIdx]
-        header.configure(with: month.title, config: config)
-        return header
+        
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: KarendaMonthHeaderView.reuseIdentifier,
+                for: indexPath
+            ) as? KarendaMonthHeaderView else {
+                return UICollectionReusableView()
+            }
+            header.configure(with: month.title, config: config)
+            return header
+            
+        } else if kind == UICollectionView.elementKindSectionFooter {
+            guard let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: KarendaMonthFooterView.reuseIdentifier,
+                for: indexPath
+            ) as? KarendaMonthFooterView else {
+                return UICollectionReusableView()
+            }
+            
+            let holidaysInMonth = config.holidays(forMonth: month.month, year: month.year)
+            footer.configure(with: holidaysInMonth, config: config)
+            return footer
+        }
+        
+        return UICollectionReusableView()
     }
 }
 
