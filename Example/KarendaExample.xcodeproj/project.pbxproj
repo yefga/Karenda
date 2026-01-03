@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2180B8E37AB39CB642C57795 /* Karenda.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFAD33B31B7EEEE72E6D7FE2 /* Karenda.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4AAD9EA735F594156F89B71B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC094E5924EDA5F0F25CE97 /* Assets.xcassets */; };
+		4F38151BACEB656E32CD0DA4 /* TuistBundle+KarendaExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A54516385764BCB24576BB7 /* TuistBundle+KarendaExampleApp.swift */; };
+		501BC6A479D66EC86ECCF563 /* Karenda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFAD33B31B7EEEE72E6D7FE2 /* Karenda.framework */; };
+		71B43AA50EEE76CAA03DC2DA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0DEC8F7DD5EE7BC2EB41D7 /* SceneDelegate.swift */; };
+		9AC0F4E29B8AA461E0DAC026 /* SingleSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F75D2E660268B7D11A7F6C1 /* SingleSelectViewController.swift */; };
+		A4D9FF453347DC90B7AF8EB6 /* TuistAssets+KarendaExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE09AE6867DD680338C380F /* TuistAssets+KarendaExampleApp.swift */; };
+		BECB52D209A25F9ADDAECCE3 /* VerticalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF200ACD2889B7066D0306F3 /* VerticalCalendarViewController.swift */; };
+		C2791CED9938B8AB738F2944 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC5262AA1136932AF00B927 /* LaunchScreen.storyboard */; };
+		C587D74A37BD3881B95D8AE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA389145A457A3E68897BE26 /* AppDelegate.swift */; };
+		CD3A61023BD4F9AA1251E46D /* HorizontalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBF19EAFC316DD4FD010D2B /* HorizontalCalendarViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A6C65BBDC35C8F27F01A6C47 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2180B8E37AB39CB642C57795 /* Karenda.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0A54516385764BCB24576BB7 /* TuistBundle+KarendaExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+KarendaExampleApp.swift"; sourceTree = "<group>"; };
+		3DC094E5924EDA5F0F25CE97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6EEE7FE742682F9A3F4954A0 /* KarendaExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarendaExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F75D2E660268B7D11A7F6C1 /* SingleSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectViewController.swift; sourceTree = "<group>"; };
+		9FE09AE6867DD680338C380F /* TuistAssets+KarendaExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+KarendaExampleApp.swift"; sourceTree = "<group>"; };
+		AC86B32AE792A218D5730EB6 /* KarendaExampleApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "KarendaExampleApp-Info.plist"; sourceTree = "<group>"; };
+		BA389145A457A3E68897BE26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BCBF19EAFC316DD4FD010D2B /* HorizontalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendarViewController.swift; sourceTree = "<group>"; };
+		EA0DEC8F7DD5EE7BC2EB41D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		EBC5262AA1136932AF00B927 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EFAD33B31B7EEEE72E6D7FE2 /* Karenda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Karenda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF200ACD2889B7066D0306F3 /* VerticalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCalendarViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2306B8754B39AEBE5A652650 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				501BC6A479D66EC86ECCF563 /* Karenda.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0106C3847F37F6188B7931AF /* InfoPlists */ = {
+			isa = PBXGroup;
+			children = (
+				AC86B32AE792A218D5730EB6 /* KarendaExampleApp-Info.plist */,
+			);
+			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		5D6290B8173B0FA41AC6D9DE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3DC094E5924EDA5F0F25CE97 /* Assets.xcassets */,
+				EBC5262AA1136932AF00B927 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5DBD34C76D39B252B032776F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				BA389145A457A3E68897BE26 /* AppDelegate.swift */,
+				BCBF19EAFC316DD4FD010D2B /* HorizontalCalendarViewController.swift */,
+				EA0DEC8F7DD5EE7BC2EB41D7 /* SceneDelegate.swift */,
+				6F75D2E660268B7D11A7F6C1 /* SingleSelectViewController.swift */,
+				FF200ACD2889B7066D0306F3 /* VerticalCalendarViewController.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		640F690AF61655558B712FD2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9FE09AE6867DD680338C380F /* TuistAssets+KarendaExampleApp.swift */,
+				0A54516385764BCB24576BB7 /* TuistBundle+KarendaExampleApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		7C12D63C3A2609C9F9CF7328 = {
+			isa = PBXGroup;
+			children = (
+				E111E6083DC0FBF0CD63CEEA /* Products */,
+				AF65F18404D118158A264AF9 /* Project */,
+			);
+			sourceTree = "<group>";
+		};
+		AF65F18404D118158A264AF9 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				F9C88099EA2815ED516977F8 /* Derived */,
+				D32FECA63260E11E50F4FEDC /* KarendaExampleApp */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		D32FECA63260E11E50F4FEDC /* KarendaExampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				5D6290B8173B0FA41AC6D9DE /* Resources */,
+				5DBD34C76D39B252B032776F /* Sources */,
+			);
+			path = KarendaExampleApp;
+			sourceTree = "<group>";
+		};
+		E111E6083DC0FBF0CD63CEEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EFAD33B31B7EEEE72E6D7FE2 /* Karenda.framework */,
+				6EEE7FE742682F9A3F4954A0 /* KarendaExampleApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F9C88099EA2815ED516977F8 /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				0106C3847F37F6188B7931AF /* InfoPlists */,
+				640F690AF61655558B712FD2 /* Sources */,
+			);
+			path = Derived;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		99AB5105363317A9A1B62437 /* KarendaExampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B279ED89277D7F474B19A98 /* Build configuration list for PBXNativeTarget "KarendaExampleApp" */;
+			buildPhases = (
+				7AECC9AD0F2EA0B029C00614 /* Sources */,
+				3E5D3366C20E4785A384BCC6 /* Resources */,
+				2306B8754B39AEBE5A652650 /* Frameworks */,
+				A6C65BBDC35C8F27F01A6C47 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KarendaExampleApp;
+			packageProductDependencies = (
+			);
+			productName = KarendaExampleApp;
+			productReference = 6EEE7FE742682F9A3F4954A0 /* KarendaExampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C6C588FC97821BBF912955D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				ORGANIZATIONNAME = Example;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = D0CFC05A24DFE2A272D044D4 /* Build configuration list for PBXProject "KarendaExample" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7C12D63C3A2609C9F9CF7328;
+			productRefGroup = E111E6083DC0FBF0CD63CEEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				99AB5105363317A9A1B62437 /* KarendaExampleApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3E5D3366C20E4785A384BCC6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AAD9EA735F594156F89B71B /* Assets.xcassets in Resources */,
+				C2791CED9938B8AB738F2944 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7AECC9AD0F2EA0B029C00614 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4D9FF453347DC90B7AF8EB6 /* TuistAssets+KarendaExampleApp.swift in Sources */,
+				4F38151BACEB656E32CD0DA4 /* TuistBundle+KarendaExampleApp.swift in Sources */,
+				C587D74A37BD3881B95D8AE8 /* AppDelegate.swift in Sources */,
+				CD3A61023BD4F9AA1251E46D /* HorizontalCalendarViewController.swift in Sources */,
+				71B43AA50EEE76CAA03DC2DA /* SceneDelegate.swift in Sources */,
+				9AC0F4E29B8AA461E0DAC026 /* SingleSelectViewController.swift in Sources */,
+				BECB52D209A25F9ADDAECCE3 /* VerticalCalendarViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2A2139169513951E9540BB52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/KarendaExampleApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.karenda.example;
+				PRODUCT_NAME = KarendaExampleApp;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		34444ABF5FACB814059E5C21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/KarendaExampleApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.karenda.example;
+				PRODUCT_NAME = KarendaExampleApp;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3CC3419689E79A25E0423DA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8C6F5B9A8F60B53AB54A4DF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B279ED89277D7F474B19A98 /* Build configuration list for PBXNativeTarget "KarendaExampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34444ABF5FACB814059E5C21 /* Debug */,
+				2A2139169513951E9540BB52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0CFC05A24DFE2A272D044D4 /* Build configuration list for PBXProject "KarendaExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CC3419689E79A25E0423DA5 /* Debug */,
+				8C6F5B9A8F60B53AB54A4DF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C6C588FC97821BBF912955D4 /* Project object */;
+}

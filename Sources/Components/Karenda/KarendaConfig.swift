@@ -1,0 +1,270 @@
+//
+//  KarendaConfig.swift
+//  Karenda
+//
+//  Created on 2026-01-03.
+//
+
+import UIKit
+
+// MARK: - Enums
+
+/// Scroll direction options for the Karenda calendar picker.
+public enum KarendaDirection {
+    /// Vertical scrolling - shows all months stacked vertically, scroll up/down
+    case vertical
+    /// Horizontal scrolling - shows 1 month per page, swipe left/right
+    case horizontal
+}
+
+/// Starting day of the week for the calendar.
+public enum KarendaStartDay: Int, CaseIterable {
+    case sunday = 1
+    case monday = 2
+    case tuesday = 3
+    case wednesday = 4
+    case thursday = 5
+    case friday = 6
+    case saturday = 7
+    
+    /// Short weekday labels starting from this day
+    var weekdayLabels: [String] {
+        let allDays = ["S", "M", "T", "W", "T", "F", "S"]
+        let startIndex = rawValue - 1
+        return Array(allDays[startIndex...]) + Array(allDays[..<startIndex])
+    }
+    
+    /// Full weekday names starting from this day
+    var weekdayNames: [String] {
+        let allDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        let startIndex = rawValue - 1
+        return Array(allDays[startIndex...]) + Array(allDays[..<startIndex])
+    }
+}
+
+// MARK: - Configuration
+
+/// Configuration for the Karenda calendar picker.
+public struct KarendaConfig {
+    
+    // MARK: - Date Range
+    
+    /// The start date of the calendar range (format: dd/MM/yyyy)
+    public let startDate: String
+    
+    /// The end date of the calendar range (format: dd/MM/yyyy)
+    public let endDate: String
+    
+    // MARK: - Features
+    
+    /// List of public holidays to highlight (format: dd/MM/yyyy)
+    public let publicHolidays: [String]
+    
+    /// Whether multi-date selection is enabled.
+    /// When `true`, users can select a date range (start and end).
+    /// When `false`, users can only select a single date.
+    public let isMultiSelectEnabled: Bool
+    
+    // MARK: - Layout
+    
+    /// Scroll direction for the calendar.
+    /// - `.vertical`: All months stacked, scroll up/down
+    /// - `.horizontal`: One month per page, swipe left/right
+    public let direction: KarendaDirection
+    
+    /// The first day of the week. Defaults to `.sunday`
+    public let startDayOfWeek: KarendaStartDay
+    
+    // MARK: - Appearance
+    
+    /// Background color for selected dates (start/end of range)
+    public let selectedBackgroundColor: UIColor
+    
+    /// Corner radius for selected date circles. Defaults to 0 (square).
+    /// Set to a high value (e.g., 100) for circular selection.
+    public let selectionCornerRadius: CGFloat
+    
+    /// Background color for dates in the selected range (between start and end)
+    public let rangeBackgroundColor: UIColor
+    
+    /// Tint color for text (optional). When set, applies to day text.
+    public let textTintColor: UIColor?
+    
+    /// Text color for selected dates
+    public let selectedTextColor: UIColor
+    
+    /// Text color for today's date
+    public let todayTextColor: UIColor
+    
+    /// Text color for public holidays
+    public let holidayTextColor: UIColor
+    
+    /// Text color for weekend days (Saturday and Sunday)
+    public let weekendTextColor: UIColor
+    
+    /// Text color for days outside the valid range
+    public let disabledTextColor: UIColor
+    
+    /// Text color for month/year headers
+    public let headerTextColor: UIColor
+    
+    /// Text color for weekday labels (S, M, T, W, T, F, S)
+    public let weekdayLabelColor: UIColor
+    
+    /// Background color for the calendar
+    public let backgroundColor: UIColor
+    
+    // MARK: - Typography
+    
+    /// Font for day numbers (optional). When nil, uses system font.
+    public let dayFont: UIFont?
+    
+    /// Font for month/year headers (optional). When nil, uses system font.
+    public let headerFont: UIFont?
+    
+    /// Font for weekday labels (optional). When nil, uses system font.
+    public let weekdayFont: UIFont?
+    
+    // MARK: - Initialization
+    
+    /// Creates a new Karenda configuration.
+    /// - Parameters:
+    ///   - startDate: The start date of the calendar range (format: dd/MM/yyyy)
+    ///   - endDate: The end date of the calendar range (format: dd/MM/yyyy)
+    ///   - publicHolidays: List of public holidays (format: dd/MM/yyyy). Defaults to empty.
+    ///   - isMultiSelectEnabled: Whether multi-date selection is enabled. Defaults to `true`.
+    ///   - direction: Scroll direction (`.vertical` or `.horizontal`). Defaults to `.vertical`.
+    ///   - startDayOfWeek: First day of the week. Defaults to `.sunday`.
+    ///   - selectedBackgroundColor: Background color for selected dates. Defaults to system blue.
+    ///   - selectionCornerRadius: Corner radius for selection. Defaults to 0 (square).
+    ///   - rangeBackgroundColor: Background color for range dates. Defaults to light blue.
+    ///   - textTintColor: Optional tint color for day text. Defaults to nil.
+    ///   - selectedTextColor: Text color for selected dates. Defaults to white.
+    ///   - todayTextColor: Text color for today. Defaults to system blue.
+    ///   - holidayTextColor: Text color for holidays. Defaults to system red.
+    ///   - weekendTextColor: Text color for weekends. Defaults to secondary label.
+    ///   - disabledTextColor: Text color for disabled days. Defaults to tertiary label.
+    ///   - headerTextColor: Text color for headers. Defaults to label color.
+    ///   - weekdayLabelColor: Text color for weekday labels. Defaults to secondary label.
+    ///   - backgroundColor: Background color. Defaults to system background.
+    ///   - dayFont: Optional font for day numbers.
+    ///   - headerFont: Optional font for headers.
+    ///   - weekdayFont: Optional font for weekday labels.
+    public init(
+        startDate: String,
+        endDate: String,
+        publicHolidays: [String] = [],
+        isMultiSelectEnabled: Bool = true,
+        direction: KarendaDirection = .vertical,
+        startDayOfWeek: KarendaStartDay = .sunday,
+        selectedBackgroundColor: UIColor = .systemBlue,
+        selectionCornerRadius: CGFloat = 0,
+        rangeBackgroundColor: UIColor? = nil,
+        textTintColor: UIColor? = nil,
+        selectedTextColor: UIColor = .white,
+        todayTextColor: UIColor = .systemBlue,
+        holidayTextColor: UIColor = .systemRed,
+        weekendTextColor: UIColor = .secondaryLabel,
+        disabledTextColor: UIColor = .tertiaryLabel,
+        headerTextColor: UIColor = .label,
+        weekdayLabelColor: UIColor = .secondaryLabel,
+        backgroundColor: UIColor = .systemBackground,
+        dayFont: UIFont? = nil,
+        headerFont: UIFont? = nil,
+        weekdayFont: UIFont? = nil
+    ) {
+        self.startDate = startDate
+        self.endDate = endDate
+        self.publicHolidays = publicHolidays
+        self.isMultiSelectEnabled = isMultiSelectEnabled
+        self.direction = direction
+        self.startDayOfWeek = startDayOfWeek
+        self.selectedBackgroundColor = selectedBackgroundColor
+        self.selectionCornerRadius = selectionCornerRadius
+        self.rangeBackgroundColor = rangeBackgroundColor ?? selectedBackgroundColor.withAlphaComponent(0.15)
+        self.textTintColor = textTintColor
+        self.selectedTextColor = selectedTextColor
+        self.todayTextColor = todayTextColor
+        self.holidayTextColor = holidayTextColor
+        self.weekendTextColor = weekendTextColor
+        self.disabledTextColor = disabledTextColor
+        self.headerTextColor = headerTextColor
+        self.weekdayLabelColor = weekdayLabelColor
+        self.backgroundColor = backgroundColor
+        self.dayFont = dayFont
+        self.headerFont = headerFont
+        self.weekdayFont = weekdayFont
+    }
+    
+    // MARK: - Resolved Fonts
+    
+    /// Resolved font for day numbers
+    var resolvedDayFont: UIFont {
+        dayFont ?? .systemFont(ofSize: 16)
+    }
+    
+    /// Resolved font for headers
+    var resolvedHeaderFont: UIFont {
+        headerFont ?? .systemFont(ofSize: 17, weight: .medium)
+    }
+    
+    /// Resolved font for weekday labels
+    var resolvedWeekdayFont: UIFont {
+        weekdayFont ?? .systemFont(ofSize: 13)
+    }
+    
+    /// Resolved text color for regular days
+    var resolvedDayTextColor: UIColor {
+        textTintColor ?? .label
+    }
+}
+
+// MARK: - Date Parsing Helpers
+
+extension KarendaConfig {
+    
+    /// Date formatter for parsing dd/MM/yyyy format
+    public static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
+    
+    /// Parses a date string in dd/MM/yyyy format
+    /// - Parameter dateString: The date string to parse
+    /// - Returns: The parsed Date, or nil if parsing fails
+    public static func parseDate(_ dateString: String) -> Date? {
+        return dateFormatter.date(from: dateString)
+    }
+    
+    /// Formats a Date to dd/MM/yyyy string
+    /// - Parameter date: The date to format
+    /// - Returns: The formatted string
+    public static func formatDate(_ date: Date) -> String {
+        return dateFormatter.string(from: date)
+    }
+    
+    /// The parsed start date
+    public var parsedStartDate: Date? {
+        return KarendaConfig.parseDate(startDate)
+    }
+    
+    /// The parsed end date
+    public var parsedEndDate: Date? {
+        return KarendaConfig.parseDate(endDate)
+    }
+    
+    /// The parsed public holiday dates
+    public var parsedPublicHolidays: Set<Date> {
+        let calendar = Calendar.current
+        var holidays = Set<Date>()
+        for holiday in publicHolidays {
+            if let date = KarendaConfig.parseDate(holiday) {
+                let normalized = calendar.startOfDay(for: date)
+                holidays.insert(normalized)
+            }
+        }
+        return holidays
+    }
+}
