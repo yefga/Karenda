@@ -24,7 +24,6 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/yefga/Karenda.git", :tag => "#{spec.version}" }
   spec.source_files = "Sources/**/*.swift"
-  spec.resources    = "Sources/Resources/**/*"
 
   spec.framework    = "UIKit"
   spec.requires_arc = true
