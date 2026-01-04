@@ -1,6 +1,6 @@
 # Karenda (カレンダー)
 
-[English](README.md) | **日本語**
+[English](README.md) | **日本語** | [한국어](ko_README.md)
 
 iOS用のモダンなUIKitベースのカレンダー日付選択フレームワーク。
 
